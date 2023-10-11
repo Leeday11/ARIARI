@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background">
+
+
+    <ImageView
+        android:id="@+id/diary_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/diary_header"
+        android:adjustViewBounds="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/emotion_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/diary_header">
+
+        <RadioButton
+            android:id="@+id/radio1_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:buttonTint="@color/brown_text"
+            android:gravity="center"
+            android:text="매우좋음🥰"
+            android:textAlignment="center" />
+
+        <RadioButton
+            android:id="@+id/radio1_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:buttonTint="@color/brown_text"
+            android:gravity="center"
+            android:text="좋음😊"
+            android:textAlignment="center" />
+
+        <RadioButton
+            android:id="@+id/radio1_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:buttonTint="@color/brown_text"
+            android:gravity="center"
+            android:text="보통😗"
+            android:textAlignment="center" />
+
+        <RadioButton
+            android:id="@+id/radio1_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:buttonTint="@color/brown_text"
+            android:gravity="center"
+            android:text="나쁨🤨"
+            android:textAlignment="center" />
+
+        <RadioButton
+            android:id="@+id/radio1_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:buttonTint="@color/brown_text"
+            android:gravity="center"
+            android:text="매우나쁨🤬"
+            android:textAlignment="center" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/write_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/textview_background"
+        android:hint="      제목을 입력하세요."
+        android:letterSpacing="-0.05"
+        android:textColor="@color/brown_text"
+        android:textSize="18sp"
+        android:layout_margin="15dp"
+        app:layout_constraintTop_toBottomOf="@id/emotion_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/write_title"/>
+
+    <EditText
+        android:id="@+id/write_text"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:inputType="textMultiLine"
+        android:hint="      일기를 작성해보세요."
+        android:letterSpacing="-0.05"
+        android:textColor="@color/brown_text"
+        android:textSize="15sp"
+        android:background="@drawable/textview_background"
+        android:layout_margin="15dp"
+        app:layout_constraintTop_toBottomOf="@id/write_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="일기 저장하기"
+        android:textSize="16sp"
+        android:letterSpacing="-0.05"
+        android:textColor="@color/brown_text"
+        android:background="@drawable/btn_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/write_text"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

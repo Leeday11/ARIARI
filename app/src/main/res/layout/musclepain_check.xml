@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <ImageView
+        android:id="@+id/musclepain_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/musclepain_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/guide_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:letterSpacing="-0.05"
+        android:text="오늘 통증을 느꼈던 부위를 모두 선택해주세요."
+        android:textColor="@color/brown_text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/musclepain_header" />
+
+    <ImageButton
+        android:id="@+id/btn_wrist"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/wrist_pain"
+        app:layout_constraintBottom_toTopOf="@+id/btn_shoulder"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/guide_text" />
+
+    <ImageButton
+        android:id="@+id/btn_finger"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/finger_pain"
+        app:layout_constraintBottom_toTopOf="@+id/btn_elbow"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/guide_text" />
+
+    <ImageButton
+        android:id="@+id/btn_shoulder"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/shoulder_pain"
+        app:layout_constraintBottom_toTopOf="@+id/btn_waist"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/btn_wrist" />
+
+    <ImageButton
+        android:id="@+id/btn_elbow"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/elbow_pain"
+        app:layout_constraintBottom_toTopOf="@+id/btn_hipjoint"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_finger" />
+
+    <ImageButton
+        android:id="@+id/btn_waist"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/waist_pain"
+        app:layout_constraintBottom_toTopOf="@+id/btn_knee"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/btn_shoulder" />
+
+    <ImageButton
+        android:id="@+id/btn_hipjoint"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/hipjoint_pain"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ankle"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_elbow" />
+
+    <ImageButton
+        android:id="@+id/btn_knee"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/knee_pain"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/btn_waist" />
+
+    <ImageButton
+        android:id="@+id/btn_ankle"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ankle_pain"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hipjoint" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"
+        android:letterSpacing="-0.05"
+        android:text="저장하기"
+        android:textColor="@color/brown_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.88" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="15dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
