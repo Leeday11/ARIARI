@@ -6,17 +6,11 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-interface PostService {
-
-    @POST("api/question/create")
-    fun requestPost(
-        //header에 token정보를 같이 보내서 로그인여부를 확인!
-        @Header("Authorization") authorization : String,
-        @Body postData:postQuestion) : Call<ResponseBody> // output 정의
-
+interface ApiService {
     @POST("api/user/create")
     fun requestPostUser(@Body postData : userInfo) : Call<ResponseBody>
 
@@ -28,6 +22,13 @@ interface PostService {
     fun requestQuestionPost(
         @Header("Authorization") authorization : String,
         @Body postData:postQuestion) : Call<ResponseBody>       //Call<ResponseBody> : output
+
+    @POST("api/sympton/create")
+    fun sendAnswers(@Body answer: Answer): Call<String>
+
+    @GET("/api/symton/list")
+    fun getSymptonList(): Call<List<SymptonResponse>>
+
 }
 
 //interface PostService {
@@ -53,9 +54,3 @@ interface PostService {
 //    val password2: String = "",
 //    val birthday: String = ""
 //)
-
-data class SignUpResponse(val success: Boolean, val message: String)
-
-
-// 추가해야 할 로그인 응답 클래스 (예시입니다)
-data class LoginResponse(val success: Boolean, val message: String?, val token: String?)

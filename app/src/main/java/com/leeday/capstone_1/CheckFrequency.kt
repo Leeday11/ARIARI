@@ -1,11 +1,96 @@
 package com.leeday.capstone_1
 
 import android.os.Bundle
+import android.view.View
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
+import androidx.activity.ComponentActivity
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class CheckFrequency : AppCompatActivity() {
+class CheckFrequency : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.frequency_check)
+        setContentView(R.layout.frequency_check) // replace with your layout XML name
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://43.200.84.39/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+
+        val button = findViewById<AppCompatButton>(R.id.btn_save)
+        val group1 = findViewById<RadioGroup>(R.id.group1)
+        val group2 = findViewById<RadioGroup>(R.id.group2)
+        val group3 = findViewById<RadioGroup>(R.id.group3)
+        val group4 = findViewById<RadioGroup>(R.id.group4)
+
+        setupRadioGroupBehavior(group1)
+        setupRadioGroupBehavior(group2)
+        setupRadioGroupBehavior(group3)
+        setupRadioGroupBehavior(group4)
+
+        button.setOnClickListener {
+            if (isAllRadioGroupsChecked(group1, group2, group3, group4)) {
+                val answer = Answer(
+                    getSelectedValueFromGroup(group1),
+                    getSelectedValueFromGroup(group2),
+                    getSelectedValueFromGroup(group3),
+                    getSelectedValueFromGroup(group4)
+                )
+
+                apiService.sendAnswers(answer).enqueue(object : Callback<String> {
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        if (response.isSuccessful && response.code() == 204) {
+                            // 성공적으로 데이터가 전송되었을 때의 처리
+                        } else {
+                            // 오류가 발생한 경우의 처리 (예: Toast 메시지 표시)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        // 네트워크 에러 또는 기타 이유로 실패한 경우의 처리 (예: Toast 메시지 표시)
+                    }
+                })
+            } else {
+                // 모든 라디오 버튼 그룹이 선택되지 않은 경우의 처리
+            }
+        }
+    }
+
+    private fun setupRadioGroupBehavior(radioGroup: RadioGroup) {
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            for (i in 0 until group.childCount) {
+                val radioButton = group.getChildAt(i) as RadioButton
+                if (radioButton.id == checkedId) {
+                    radioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.warm_grey)) // selected color
+                } else {
+                    radioButton.background = null
+                }
+            }
+        }
+    }
+
+    private fun isAllRadioGroupsChecked(vararg groups: RadioGroup): Boolean {
+        for (group in groups) {
+            val selectedRadioButtonId = group.checkedRadioButtonId
+            if (selectedRadioButtonId == View.NO_ID) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun getSelectedValueFromGroup(group: RadioGroup): Int {
+        return findViewById<RadioButton>(group.checkedRadioButtonId).text.toString().toInt()
     }
 }

@@ -12,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.leeday.capstone_1.PostService
+import com.leeday.capstone_1.ApiService
 import okhttp3.ResponseBody
 
 class SigninPage : AppCompatActivity() {
@@ -33,7 +33,7 @@ class SigninPage : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val postService : PostService = retrofit.create(PostService::class.java)
+        val apiService : ApiService = retrofit.create(ApiService::class.java)
 
         val user_loginid : EditText = findViewById(R.id.edit_userid)
         val password1 : EditText = findViewById(R.id.edit_pw)
@@ -54,7 +54,7 @@ class SigninPage : AppCompatActivity() {
                 birthday = postBirthday
             )
 
-            postService.requestPostUser(postData).enqueue(object : Callback<ResponseBody>{
+            apiService.requestPostUser(postData).enqueue(object : Callback<ResponseBody>{
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>, ) {
                     Log.d("test_debug", response.toString())
 

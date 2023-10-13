@@ -18,3 +18,8 @@ data class userInfo(
     @SerializedName("birthday")
     val birthday : String
 )
+
+
+data class SignUpResponse(val success: Boolean, val message: String)
+
+data class LoginResponse(val success: Boolean, val message: String?, val token: String?)

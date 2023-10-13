@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val postService : PostService = retrofit.create(PostService::class.java)
+        val apiService : ApiService = retrofit.create(ApiService::class.java)
 
         val user_loginid : EditText = findViewById(R.id.ID_input)
         val password : EditText = findViewById(R.id.PW_input)
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         val dialog = AlertDialog.Builder(this@MainActivity)
 
         btn_login.setOnClickListener {
-            postService.requestUserLogin(user_loginid = user_loginid.text.toString(), password = password.text.toString())
+            apiService.requestUserLogin(user_loginid = user_loginid.text.toString(), password = password.text.toString())
                 .enqueue(object : Callback<JsonObject>{
                     override fun onResponse(
                         call: Call<JsonObject>,
