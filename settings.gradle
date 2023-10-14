@@ -2,6 +2,7 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
+        maven {url "https://jitpack.io"}
         gradlePluginPortal()
     }
 }
@@ -10,6 +11,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {url "https://jitpack.io"}        //MPAndroidChart import오류. 해당 라인에서 해결. 위의 repositories만 넣는 게 아니라 이 부분의 repositories에도 넣어야 했음...
     }
 }
 rootProject.name = "Capstone_1"

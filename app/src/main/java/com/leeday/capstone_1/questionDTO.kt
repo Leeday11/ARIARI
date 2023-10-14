@@ -22,7 +22,7 @@ data class Answer(
 )
 
 //Frequency Check DTO
-data class SymptonResponse(
+data class Symptom(
     val id: Int,
     val create_date: String,
     val flushing_face: Int,
@@ -33,3 +33,8 @@ data class SymptonResponse(
 )
 
 data class User(val id: Int, val user_loginid: String, val username: String)
+
+data class ResponseData(
+    val answerValue: Int // 응답값. 실제 데이터에 따라 필드 이름 및 타입 변경이 필요합니다.
+)
+

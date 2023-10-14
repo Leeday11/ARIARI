@@ -16,7 +16,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CheckFrequency : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.frequency_check) // replace with your layout XML name
@@ -52,17 +51,21 @@ class CheckFrequency : ComponentActivity() {
                     override fun onResponse(call: Call<String>, response: Response<String>) {
                         if (response.isSuccessful && response.code() == 204) {
                             // 성공적으로 데이터가 전송되었을 때의 처리
+                            Toast.makeText(applicationContext, "success!", Toast.LENGTH_SHORT).show()
                         } else {
-                            // 오류가 발생한 경우의 처리 (예: Toast 메시지 표시)
+                            val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                            Toast.makeText(applicationContext, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<String>, t: Throwable) {
-                        // 네트워크 에러 또는 기타 이유로 실패한 경우의 처리 (예: Toast 메시지 표시)
+                        // 네트워크 에러 또는 기타 이유로 실패한 경우의 처리
+                        Toast.makeText(applicationContext, "Failed: ${t.message}", Toast.LENGTH_SHORT).show()
                     }
                 })
             } else {
                 // 모든 라디오 버튼 그룹이 선택되지 않은 경우의 처리
+                Toast.makeText(applicationContext, "Please select all answers.", Toast.LENGTH_SHORT).show()
             }
         }
     }

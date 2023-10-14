@@ -61,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="0회"
+            android:text="1"
             android:textSize="15sp"
             android:gravity="center"
             android:textAlignment="center"
@@ -71,7 +71,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="1~2회"
+            android:text="2"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -80,7 +80,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="3~4회"
+            android:text="3"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -89,7 +89,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="5~6회"
+            android:text="4"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="7회↑"
+            android:text="5"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -132,7 +132,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="0회"
+            android:text="1"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -141,7 +141,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="1~2회"
+            android:text="2"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -150,7 +150,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="3~4회"
+            android:text="3"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -159,7 +159,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="5~6회"
+            android:text="4"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -168,7 +168,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="7회↑"
+            android:text="5"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -202,7 +202,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="0회"
+            android:text="1"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -211,7 +211,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="1~2회"
+            android:text="2"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -220,7 +220,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="3~4회"
+            android:text="3"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -229,7 +229,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="5~6회"
+            android:text="4"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -238,7 +238,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="7회↑"
+            android:text="5"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -274,7 +274,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="1점"
+            android:text="1"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -283,7 +283,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="2점"
+            android:text="2"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -292,7 +292,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="3점"
+            android:text="3"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -301,7 +301,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="4점"
+            android:text="4"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>
@@ -310,7 +310,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="40dp"
-            android:text="5점"
+            android:text="5"
             android:gravity="center"
             android:textAlignment="center"
             android:button="@null"/>

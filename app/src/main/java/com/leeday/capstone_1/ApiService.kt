@@ -23,13 +23,18 @@ interface ApiService {
         @Header("Authorization") authorization : String,
         @Body postData:postQuestion) : Call<ResponseBody>       //Call<ResponseBody> : output
 
-    @POST("api/sympton/create")
+    @POST("api/symptom/create")
     fun sendAnswers(@Body answer: Answer): Call<String>
 
-    @GET("/api/symton/list")
-    fun getSymptonList(): Call<List<SymptonResponse>>
+    @GET("api/symptom/list")
+    fun getSymptoms(): Call<List<Symptom>>
 
+    @GET("api/symptom/list")
+    fun getUserResponses(): Call<List<ResponseData>>
 }
+
+
+
 
 //interface PostService {
 //
@@ -38,7 +43,6 @@ interface ApiService {
 //        @Header("Authorization") authorization : String,
 //        @Body postData:postQuestion) : Call<ResponseBody>       //Call<ResponseBody> : output
 //}
-//
 //interface ApiService {
 //    @POST("api/user/create")
 //    fun signUp(@Body userInfo: UserInfo): Call<SignUpResponse>
