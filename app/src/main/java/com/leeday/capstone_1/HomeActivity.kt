@@ -39,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
         val imageButton3 = findViewById<ImageButton>(R.id.btn_chatbot)
         imageButton3.setOnClickListener {
             // 다른 액티비티로 이동하는 인텐트 생성
-            val intent = Intent(this, MainChatbot::class.java)
+            val intent = Intent(this, ChatbotWeb::class.java)
             startActivity(intent)
         }
 

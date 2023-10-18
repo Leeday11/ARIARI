@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import com.google.gson.JsonObject
 
 
 import okhttp3.ResponseBody
@@ -31,7 +32,7 @@ class WriteCommunity : ComponentActivity() {
 
         // Retrofit 설정
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://43.200.84.39/")
+            .baseUrl(globalVariable.api_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -60,8 +61,8 @@ class WriteCommunity : ComponentActivity() {
             // postData에서 tag에 선택된 카테고리를 사용하도록 수정
             val postData = postQuestion(subject = postSubject, content = postContent, tag = selectedCategory)
 
-            apiService.requestQuestionPost("Bearer " + globalVariable.accesstoken, postData).enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+            apiService.requestQuestionPost("Bearer " + globalVariable.accesstoken, postData).enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     Log.d("test_debug", response.toString())
 
                     val dialog = AlertDialog.Builder(this@WriteCommunity)
@@ -77,7 +78,7 @@ class WriteCommunity : ComponentActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     val dialog = AlertDialog.Builder(this@WriteCommunity)
                     dialog.setTitle("알람!")
                     dialog.setMessage("통신실패!")

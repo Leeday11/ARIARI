@@ -21,6 +21,17 @@ data class Answer(
     val condition: Int
 )
 
+data class Answer2(
+    val shoulder : Boolean,
+    val elbow : Boolean,
+    val finger : Boolean,
+    val wrist : Boolean,
+    val joint : Boolean,
+    val knee : Boolean,
+    val ankle : Boolean,
+    val waist : Boolean
+)
+
 //Frequency Check DTO
 data class Symptom(
     val id: Int,

@@ -11,6 +11,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.google.gson.JsonObject
 
 class CheckGraph : AppCompatActivity() {
 
@@ -32,12 +33,12 @@ class CheckGraph : AppCompatActivity() {
         val apiService = retrofit.create(ApiService::class.java)
 
         // 첫 번째 그래프 데이터 로드
-        apiService.getSymptoms().enqueue(object : Callback<List<Symptom>> {
-            override fun onResponse(call: Call<List<Symptom>>, response: Response<List<Symptom>>) {
+        apiService.getSymptoms().enqueue(object : Callback<List<JsonObject>> {
+            override fun onResponse(call: Call<List<JsonObject>>, response: Response<List<JsonObject>>) {
                 if (response.isSuccessful) {
                     val symptoms = response.body()
                     val entries = symptoms?.mapIndexed { index, symptom ->
-                        Entry(index.toFloat(), symptom.flushing_face.toFloat())
+                        Entry(index.toFloat(), symptom.get("flushing_face").asFloat)
                     }
                     val dataSet = LineDataSet(entries, "Flushing Face")
                     val lineData = LineData(dataSet)
@@ -46,18 +47,18 @@ class CheckGraph : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Symptom>>, t: Throwable) {
+            override fun onFailure(call: Call<List<JsonObject>>, t: Throwable) {
                 // Handle error
             }
         })
 
         // 두 번째 그래프 데이터 로드
-        apiService.getSymptoms().enqueue(object : Callback<List<Symptom>> {
-            override fun onResponse(call: Call<List<Symptom>>, response: Response<List<Symptom>>) {
+        apiService.getSymptoms().enqueue(object : Callback<List<JsonObject>> {
+            override fun onResponse(call: Call<List<JsonObject>>, response: Response<List<JsonObject>>) {
                 if (response.isSuccessful) {
                     val symptoms = response.body()
                     val entries = symptoms?.mapIndexed { index, symptom ->
-                        Entry(index.toFloat(), symptom.sweating.toFloat())
+                        Entry(index.toFloat(), symptom.get("sweating").asFloat)
                     }
                     val dataSet = LineDataSet(entries, "Sweating")
                     val lineData = LineData(dataSet)
@@ -66,7 +67,7 @@ class CheckGraph : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Symptom>>, t: Throwable) {
+            override fun onFailure(call: Call<List<JsonObject>>, t: Throwable) {
                 // Handle error
             }
         })

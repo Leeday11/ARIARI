@@ -4,12 +4,29 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class CheckMusclepain : AppCompatActivity() {
     private val buttonSelected = BooleanArray(8)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.musclepain_check)
+
+        val globalVariable = getApplication() as GlobalVariable
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(globalVariable.api_url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
 
         val imageButton1: ImageButton = findViewById(R.id.btn_wrist)
         imageButton1.setOnClickListener {
@@ -51,7 +68,59 @@ class CheckMusclepain : AppCompatActivity() {
             buttonSelected[7] = !buttonSelected[7]
             updateButtonBackground(imageButton8, 7)
         }
+
+        val button = findViewById<AppCompatButton>(R.id.btn_save)
+
+        button.setOnClickListener {
+            if (isAnyButtonSelected()) {
+                val answer2 = Answer2(
+                    wrist  = buttonSelected[0],
+                    finger  = buttonSelected[1],
+                    shoulder = buttonSelected[2],
+                    elbow = buttonSelected[3],
+                    waist = buttonSelected[4],
+                    joint = buttonSelected[5],
+                    knee = buttonSelected[6],
+                    ankle = buttonSelected[7]
+                )
+
+                val selectedIndexes = buttonSelected.mapIndexed { index, isSelected ->
+                    if (isSelected) index else null
+                }.filterNotNull()
+
+
+                apiService.sendAnswers2("Bearer " + globalVariable.accesstoken, answer2).enqueue(object :
+                    Callback<JsonObject> {
+                    override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                        if (response.isSuccessful && response.code() == 204) {
+                            val result = response.body()
+
+                            if(result != null) {
+                                globalVariable.accesstoken = result.get("access_token").asString
+                                globalVariable.username = result.get("username").asString
+                            }
+
+                            Toast.makeText(applicationContext, "Data sent successfully!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                            Toast.makeText(applicationContext, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        Toast.makeText(applicationContext, "Failed: ${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            } else {
+                Toast.makeText(applicationContext, "Please select at least one area.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
+    private fun isAnyButtonSelected(): Boolean {
+        return buttonSelected.any { it }
+    }
+
 
     private fun updateButtonBackground(button: ImageButton, index: Int) {
         if (buttonSelected[index]) {

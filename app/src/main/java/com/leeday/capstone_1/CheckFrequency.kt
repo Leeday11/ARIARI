@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.activity.ComponentActivity
+import com.google.gson.JsonObject
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Call
@@ -20,8 +23,11 @@ class CheckFrequency : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.frequency_check) // replace with your layout XML name
 
+        // 전역 변수 호출
+        val globalVariable = getApplication() as GlobalVariable
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://43.200.84.39/")
+            .baseUrl(globalVariable.api_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -47,9 +53,15 @@ class CheckFrequency : ComponentActivity() {
                     getSelectedValueFromGroup(group4)
                 )
 
-                apiService.sendAnswers(answer).enqueue(object : Callback<String> {
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                apiService.sendAnswers("Bearer "+globalVariable.accesstoken, answer).enqueue(object : Callback<JsonObject> {
+                    override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                         if (response.isSuccessful && response.code() == 204) {
+                            val result = response.body()
+
+                            if(result != null) {
+                                globalVariable.accesstoken = result.get("access_token").asString
+                                globalVariable.username = result.get("username").asString
+                            }
                             // 성공적으로 데이터가 전송되었을 때의 처리
                             Toast.makeText(applicationContext, "success!", Toast.LENGTH_SHORT).show()
                         } else {
@@ -58,7 +70,7 @@ class CheckFrequency : ComponentActivity() {
                         }
                     }
 
-                    override fun onFailure(call: Call<String>, t: Throwable) {
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                         // 네트워크 에러 또는 기타 이유로 실패한 경우의 처리
                         Toast.makeText(applicationContext, "Failed: ${t.message}", Toast.LENGTH_SHORT).show()
                     }

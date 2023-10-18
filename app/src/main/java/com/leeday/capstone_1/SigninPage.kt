@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,8 +55,8 @@ class SigninPage : AppCompatActivity() {
                 birthday = postBirthday
             )
 
-            apiService.requestPostUser(postData).enqueue(object : Callback<ResponseBody>{
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>, ) {
+            apiService.requestPostUser(postData).enqueue(object : Callback<JsonObject>{
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>, ) {
                     Log.d("test_debug", response.toString())
 
                     val dialog = AlertDialog.Builder(this@SigninPage)
@@ -72,7 +73,7 @@ class SigninPage : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     Log.d("test_debug", t.message!!)
 
                     val dialog = AlertDialog.Builder(this@SigninPage)
