@@ -12,7 +12,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class BoardFree : ComponentActivity() {
+class BoardShareinfo : ComponentActivity() {
 
     private lateinit var postAdapter: PostAdapter
     private var posts = arrayOf<JsonObject>()
@@ -39,7 +39,7 @@ class BoardFree : ComponentActivity() {
     }
 
     private fun loadPosts(apiService: ApiService) {
-        apiService.getQuestionPost("all").enqueue(object: Callback<JsonObject> {
+        apiService.getQuestionPost("shareinfo").enqueue(object: Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     response.body()?.getAsJsonArray("question_list")?.let {
@@ -48,7 +48,6 @@ class BoardFree : ComponentActivity() {
                         postAdapter.setPosts(newPosts) // 어댑터 내부 리스트 업데이트
                         postAdapter.notifyDataSetChanged() // 데이터 변경 알림
                     }
-
                     Log.d("API", "Successfully fetched posts")
                 } else {
                     Log.d("API", "Failed with status code: ${response.code()}. Error: ${response.errorBody()?.string()}")

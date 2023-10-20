@@ -11,6 +11,8 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @POST("api/user/create")
@@ -20,14 +22,16 @@ interface ApiService {
     @POST("api/user/login")
     fun requestUserLogin(@Field("username") user_loginid : String, @Field("password") password : String) : Call<JsonObject>
 
-
-
     @POST("api/question/create")
     fun requestQuestionPost(
+        @Header("Authorization") authorization : String,
         @Body postData:postQuestion) : Call<JsonObject>       //Call<ResponseBody> : output
 
     @GET("api/question/list")
-    fun getQuestionPost() : Call<JsonObject>       //Call<ResponseBody> : output
+    fun getQuestionPost(@Query("tag") tag : String) : Call<JsonObject>       //Call<ResponseBody> : output
+
+    @GET("api/question/detail/{question_id}")
+    fun getQuestionPostDetail(@Path("question_id") questionId: Int): Call<JsonObject>
 
 
 

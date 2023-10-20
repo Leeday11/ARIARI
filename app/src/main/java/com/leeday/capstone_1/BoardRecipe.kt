@@ -12,7 +12,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class BoardFree : ComponentActivity() {
+class BoardRecipe : ComponentActivity() {
 
     private lateinit var postAdapter: PostAdapter
     private var posts = arrayOf<JsonObject>()
@@ -39,7 +39,7 @@ class BoardFree : ComponentActivity() {
     }
 
     private fun loadPosts(apiService: ApiService) {
-        apiService.getQuestionPost("all").enqueue(object: Callback<JsonObject> {
+        apiService.getQuestionPost("recipe").enqueue(object: Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     response.body()?.getAsJsonArray("question_list")?.let {

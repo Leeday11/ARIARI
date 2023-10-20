@@ -22,6 +22,16 @@
             android:name=".MainBookshelf"
             android:exported="false" />
 
+
+        <activity
+            android:name=".BoardRecipe"
+            android:exported="false"/>
+        <activity
+            android:name=".BoardShareinfo"
+            android:exported="false"/>
+        <activity
+            android:name=".BoardGoodday"
+            android:exported="false"/>
         <activity
             android:name=".BoardFree"
             android:exported="false"/>

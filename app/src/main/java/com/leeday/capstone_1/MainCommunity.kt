@@ -18,19 +18,19 @@ class MainCommunity : ComponentActivity() {
 
         val btn_good = findViewById<ImageButton>(R.id.good_header)
         btn_good.setOnClickListener{
-            val intent = Intent(this, BoardFree::class.java)
+            val intent = Intent(this, BoardGoodday::class.java)
             startActivity(intent)
         }
 
         val btn_shareinfo = findViewById<ImageButton>(R.id.shareinfo_header)
         btn_shareinfo.setOnClickListener{
-            val intent = Intent(this, BoardFree::class.java)
+            val intent = Intent(this, BoardShareinfo::class.java)
             startActivity(intent)
         }
 
         val btn_recipe = findViewById<ImageButton>(R.id.recipe_header)
         btn_recipe.setOnClickListener{
-            val intent = Intent(this, BoardFree::class.java)
+            val intent = Intent(this, BoardRecipe::class.java)
             startActivity(intent)
         }
 

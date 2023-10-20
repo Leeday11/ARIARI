@@ -68,7 +68,7 @@ class CheckGraph : AppCompatActivity() {
         musclepainChart = findViewById(R.id.musclepain_chart)
 
 
-    // 첫 번째 그래프 데이터 로드
+        // 첫 번째 그래프 데이터 로드
         apiService.getAnswers("Bearer " + globalVariable.accesstoken).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
@@ -110,6 +110,8 @@ class CheckGraph : AppCompatActivity() {
             }
         })
 
+
+        // 두 번째 그래프 데이터 로드
         apiService.getAnswers2("Bearer " + globalVariable.accesstoken).enqueue(object : Callback<JsonArray> {
             override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
                 if (response.isSuccessful) {
@@ -144,6 +146,8 @@ class CheckGraph : AppCompatActivity() {
                 Log.e("API_ERROR", t.message ?: "Unknown error")
             }
         })
+    }
+}
 
 
         // 두 번째 그래프 데이터 로드
@@ -177,6 +181,3 @@ class CheckGraph : AppCompatActivity() {
 //            }
 //        })
 
-
-    }
-}
