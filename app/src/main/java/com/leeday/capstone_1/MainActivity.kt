@@ -21,8 +21,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 전역 변수 호출
+        val globalVariable = getApplication() as GlobalVariable
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://43.200.84.39/")
+            .baseUrl(globalVariable.api_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -101,31 +104,25 @@ class MainActivity : AppCompatActivity() {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
-//
+
 //        val btnLogin = findViewById<Button>(R.id.btn_login)
 //        val idInput = findViewById<EditText>(R.id.ID_input)
 //        val pwInput = findViewById<EditText>(R.id.PW_input)
-//
 //        btnLogin.setOnClickListener {
 //            val id = idInput.text.toString()
 //            val password = pwInput.text.toString()
-//
 //            if (id.isEmpty() || password.isEmpty()) {
 //                Toast.makeText(this, "아이디와 비밀번호를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
 //                return@setOnClickListener
 //            }
-//
 //            login(id, password)
 //        }
-//
 //        val btn_signin = findViewById<Button>(R.id.btn_account)
 //        btn_signin.setOnClickListener {
 //            // 다른 액티비티로 이동하는 인텐트 생성
 //            val intent = Intent(this, SigninPage::class.java)
 //            startActivity(intent)
 //        }
-//
-
 //    }
 //
 //    private fun login(id: String, password: String) {
@@ -142,7 +139,6 @@ class MainActivity : AppCompatActivity() {
 //                    Toast.makeText(this@MainActivity, "서버 오류", Toast.LENGTH_SHORT).show()
 //                }
 //            }
-//
 //            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
 //                Toast.makeText(this@MainActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
 //            }

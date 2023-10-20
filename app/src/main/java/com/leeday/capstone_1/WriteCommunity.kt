@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.google.gson.JsonObject
 
@@ -40,13 +41,14 @@ class WriteCommunity : ComponentActivity() {
         val apiService : ApiService = retrofit.create(ApiService::class.java)
 
         // XML에서 각 요소들 호출
-        val sub : EditText = findViewById(R.id.write_title)
-        val con : EditText = findViewById(R.id.write_text)
+        val subject : EditText = findViewById(R.id.write_title)
+        val content : EditText = findViewById(R.id.write_text)
         val button : Button = findViewById(R.id.btn_create)
         val spinner : Spinner = findViewById(R.id.category_spinner)
 
         // 스피너에 들어갈 항목들
-        val categories = arrayOf("자유 게시판", "오늘 좋은 일 있었어요", "좋은 정보 나눠봐요", "제 레시피 공유합니다")
+        val categories = arrayOf("🤍 자유 게시판", "❤ 오늘 좋은 일 있었어요", "💛 좋은 정보 나눠봐요", "💙 제 레시피 공유합니다")
+        val categoryCodes = arrayOf("all", "happy", "shareinfo", "recipe")
 
         // 스피너에 어댑터 설정
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
@@ -54,38 +56,32 @@ class WriteCommunity : ComponentActivity() {
         spinner.adapter = adapter
 
         button.setOnClickListener {
-            val postSubject = sub.text.toString()
-            val postContent = con.text.toString()
-            val selectedCategory = spinner.selectedItem.toString()
+            val postSubject = subject.text.toString()
+            val postContent = content.text.toString()
+            val selectedCategoryCode = categoryCodes[spinner.selectedItemPosition]
 
-            // postData에서 tag에 선택된 카테고리를 사용하도록 수정
-            val postData = postQuestion(subject = postSubject, content = postContent, tag = selectedCategory)
+            val postData = postQuestion(subject = postSubject, content = postContent, tag = selectedCategoryCode)
 
             apiService.requestQuestionPost("Bearer " + globalVariable.accesstoken, postData).enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     Log.d("test_debug", response.toString())
 
-                    val dialog = AlertDialog.Builder(this@WriteCommunity)
                     if (response.isSuccessful) {
-                        dialog.setTitle("알람!")
-                        dialog.setMessage("정상적으로 등록되었습니다!")
-                        dialog.show()
+                        Toast.makeText(this@WriteCommunity, "정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show()
                     } else {
-                        if (response.code() == 401) {
-                            dialog.setMessage("로그인이 필요합니다!")
-                            dialog.show()
+                        when(response.code()) {
+                            401 -> Toast.makeText(this@WriteCommunity, "로그인이 필요합니다!", Toast.LENGTH_SHORT).show()
+                            else -> Toast.makeText(this@WriteCommunity, "오류가 발생했습니다: ${response.code()}", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    val dialog = AlertDialog.Builder(this@WriteCommunity)
-                    dialog.setTitle("알람!")
-                    dialog.setMessage("통신실패!")
-                    dialog.show()
+                    Toast.makeText(this@WriteCommunity, "통신실패! 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                     Log.d("test", "tlqkf")
                 }
             })
         }
+
     }
 }

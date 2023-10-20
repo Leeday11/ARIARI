@@ -1,6 +1,7 @@
 
 package com.leeday.capstone_1
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -19,26 +20,34 @@ interface ApiService {
     @POST("api/user/login")
     fun requestUserLogin(@Field("username") user_loginid : String, @Field("password") password : String) : Call<JsonObject>
 
+
+
     @POST("api/question/create")
     fun requestQuestionPost(
-        @Header("Authorization") authorization : String,
         @Body postData:postQuestion) : Call<JsonObject>       //Call<ResponseBody> : output
+
+    @GET("api/question/list")
+    fun getQuestionPost() : Call<JsonObject>       //Call<ResponseBody> : output
+
+
 
     @POST("api/symptom/create")
     fun sendAnswers(
         @Header("Authorization") authorization : String,
         @Body answer: Answer): Call<JsonObject>
 
-    @GET("api/symptom/list")
-    fun getSymptoms(): Call<List<JsonObject>>
-
-    @GET("api/symptom/list")
-    fun getUserResponses(): Call<List<JsonObject>>
-
     @POST("api/physicalpain/create")
     fun sendAnswers2(
         @Header("Authorization") authorization : String,
         @Body answer2: Answer2): Call<JsonObject>
+
+    @GET("api/symptom/list")
+    fun getAnswers(
+        @Header("Authorization") authorization : String): Call<JsonObject>
+
+    @GET("api/physicalpain/list")
+    fun getAnswers2(
+        @Header("Authorization") authorization : String): Call<JsonArray>
 }
 
 

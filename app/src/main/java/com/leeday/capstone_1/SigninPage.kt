@@ -29,8 +29,11 @@ class SigninPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.signin_page)
 
+        // 전역 변수 호출
+        val globalVariable = getApplication() as GlobalVariable
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://43.200.84.39/")
+            .baseUrl(globalVariable.api_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -85,58 +88,3 @@ class SigninPage : AppCompatActivity() {
         }
     }
 }
-//
-//        // 뷰 초기화
-//        editUsername = findViewById(R.id.edit_username)
-//        editPassword1 = findViewById(R.id.edit_pw)
-//        editPassword2 = findViewById(R.id.edit_pw_check)
-//        editNickname = findViewById(R.id.edit_nickname)
-//        editBirth = findViewById(R.id.edit_birth)
-//        btnCreateAccount = findViewById(R.id.btn_create_account)
-//
-//        btnCreateAccount.setOnClickListener {
-//            val user_loginid = editUsername.text.toString()
-//            val password1 = editPassword1.text.toString()
-//            val password2 = editPassword2.text.toString()
-//            val username = editNickname.text.toString()
-//            val birthday = editBirth.text.toString()
-////            val postData = postUser(
-////                username = postName, password1 = postPassword1,
-////                password2 = postPassword2, email = postEmail,
-////                birthday = postBirthday
-////            )
-//
-//            if (user_loginid.isEmpty() || password1.isEmpty() || username.isEmpty() || birthday.isEmpty()) {
-//                Toast.makeText(this, "모든 필드를 입력해주세요.", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//
-//            if (password1 != password2) {
-//                Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//
-//            signUp(user_loginid, password1, password2, username, birthday)
-//        }
-//    }
-//
-//    private fun signUp(user_loginid: String, password1: String, password2: String, username: String, birthday: String) {
-//        api.signUp(UserInfo(user_loginid, password1, password2, username, birthday)).enqueue(object : Callback<SignUpResponse> {
-//            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-//                if (response.isSuccessful) {
-//                    val signUpResponse = response.body()
-//                    if (signUpResponse?.success == true) {
-//                        Toast.makeText(this@SigninPage, "회원가입 성공!", Toast.LENGTH_SHORT).show()
-//                    } else {
-//                        Toast.makeText(this@SigninPage, signUpResponse?.message ?: "오류 발생", Toast.LENGTH_SHORT).show()
-//                    }
-//                } else {
-//                    Toast.makeText(this@SigninPage, "서버 오류", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-//                Toast.makeText(this@SigninPage, "네트워크 오류", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-

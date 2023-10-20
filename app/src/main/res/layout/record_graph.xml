@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toTopOf="@+id/musclepain_chart"
         app:layout_constraintVertical_weight="1" />
 
-    <com.github.mikephil.charting.charts.LineChart
+    <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/musclepain_chart"
         android:layout_width="0dp"
         android:layout_height="0dp"

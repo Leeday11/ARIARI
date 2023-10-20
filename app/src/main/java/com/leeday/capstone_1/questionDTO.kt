@@ -7,10 +7,10 @@ data class postQuestion(
     @SerializedName("subject")
     val subject : String,
 
-    @SerializedName("subject")
+    @SerializedName("content")
     val content : String,
 
-    @SerializedName("subject")
+    @SerializedName("tag")
     val tag : String
 )
 
@@ -30,17 +30,6 @@ data class Answer2(
     val knee : Boolean,
     val ankle : Boolean,
     val waist : Boolean
-)
-
-//Frequency Check DTO
-data class Symptom(
-    val id: Int,
-    val create_date: String,
-    val flushing_face: Int,
-    val sweating: Int,
-    val headache: Int,
-    val condition: Int,
-    val user: User
 )
 
 data class User(val id: Int, val user_loginid: String, val username: String)
