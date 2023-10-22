@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <!-- 밑줄이 비활성화 상태일 때의 색 -->
+        <item name="colorControlNormal">@color/warm_grey</item>
+        <!-- 밑줄이 활성화 상태일 때의 색 -->
+        <item name="colorControlActivated">@color/warm_grey</item>
+    </style>
+</resources>

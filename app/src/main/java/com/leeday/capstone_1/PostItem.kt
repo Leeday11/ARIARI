@@ -1,5 +1,6 @@
 package com.leeday.capstone_1
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,14 @@ class PostAdapter(private var posts: Array<JsonObject>) : RecyclerView.Adapter<P
         val title: TextView = itemView.findViewById(R.id.post_title)
         val author: TextView = itemView.findViewById(R.id.post_author)
         val preview: TextView = itemView.findViewById(R.id.post_preview)
+        init {
+            itemView.setOnClickListener {
+                val post = posts[adapterPosition]
+                val intent = Intent(itemView.context, CardviewBoard::class.java)
+                intent.putExtra("POST_ID", post["id"].asInt) // JsonObject 내의 게시물 ID 필드를 가져옵니다.
+                itemView.context.startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {

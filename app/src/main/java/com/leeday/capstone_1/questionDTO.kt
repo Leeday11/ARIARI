@@ -32,6 +32,12 @@ data class Answer2(
     val waist : Boolean
 )
 
+data class CommentData(val id: Int, val content: String, val username: String)
+
+
+
+
+
 data class User(val id: Int, val user_loginid: String, val username: String)
 
 data class ResponseData(
