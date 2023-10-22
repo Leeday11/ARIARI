@@ -73,6 +73,10 @@ interface ApiService {
     // 댓글 삭제하기
     @DELETE("api/answer/delete/{answer_id}")
     fun deleteComment(@Path("answer_id") commentId: Int): Call<JsonObject>
+
+    @POST("api/diary/create")
+    fun saveDiary(@Header("Authorization") token: String, @Body diaryData: JsonObject): Call<JsonObject>
+
 }
 
 

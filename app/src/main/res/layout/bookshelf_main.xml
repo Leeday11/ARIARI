@@ -27,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/write_diary"
         android:layout_width="110dp"
         android:layout_height="140dp"
         android:background="@null"
@@ -38,6 +39,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <ImageButton
+        android:id="@+id/check_diary"
         android:layout_width="110dp"
         android:layout_height="140dp"
         android:background="@null"

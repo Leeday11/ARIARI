@@ -32,6 +32,13 @@ data class Answer2(
     val waist : Boolean
 )
 
+data class DiaryData(
+    val subject: String,
+    val content: String,
+    val emotion: String
+)
+
+
 data class CommentData(val id: Int, val content: String, val username: String)
 
 
