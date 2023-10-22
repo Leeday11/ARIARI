@@ -50,11 +50,8 @@ class WriteDiary : ComponentActivity() {
             val selectedRadioButton = findViewById<RadioButton>(selectedId)
             val diaryEmotion = selectedRadioButton.text.toString()
 
-            val diaryData = JsonObject().apply {
-                addProperty("subject", diarySubject)
-                addProperty("content", diaryContent)
-                addProperty("emotion", diaryEmotion)
-            }
+            val diaryData = DiaryData(diarySubject, diaryContent, diaryEmotion)
+
 
             apiService.saveDiary("Bearer " + globalVariable.accesstoken, diaryData).enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

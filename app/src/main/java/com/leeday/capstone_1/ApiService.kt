@@ -52,7 +52,8 @@ interface ApiService {
 
     @GET("api/physicalpain/list")
     fun getAnswers2(
-        @Header("Authorization") authorization : String): Call<JsonArray>
+        @Header("Authorization") authorization : String): Call<JsonArray> //여긴 왜 JsonArray로 해두었지...
+
 
     // 댓글 등록하기
     @POST("api/answer/create/{question_id}")
@@ -74,8 +75,14 @@ interface ApiService {
     @DELETE("api/answer/delete/{answer_id}")
     fun deleteComment(@Path("answer_id") commentId: Int): Call<JsonObject>
 
+
+    // 다이어리 등록하기
     @POST("api/diary/create")
-    fun saveDiary(@Header("Authorization") token: String, @Body diaryData: JsonObject): Call<JsonObject>
+    fun saveDiary(@Header("Authorization") token: String, @Body diaryData: DiaryData): Call<JsonObject>
+
+    // 다이어리 가져오기
+    @GET("api/diary/list")
+    fun getDiary(@Header("Authorization") token: String): Call<JsonArray>
 
 }
 

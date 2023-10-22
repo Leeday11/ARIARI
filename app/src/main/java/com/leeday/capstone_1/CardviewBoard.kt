@@ -28,7 +28,6 @@ class CardviewBoard : ComponentActivity() {
     private lateinit var submitCommentButton: Button
     private lateinit var apiService: ApiService
     private var question_id: Int = -1
-
     private lateinit var commentsAdapter: CommentsAdapter
     private var commentsList = arrayOf<JsonObject>()
 

@@ -16,6 +16,13 @@ class MainBookshelf : AppCompatActivity() {
             val intent = Intent(this, WriteDiary::class.java)
             startActivity(intent)
         }
+
+        val btn_checkdiary = findViewById<ImageButton>(R.id.check_diary)
+        btn_checkdiary.setOnClickListener {
+            // 다른 액티비티로 이동하는 인텐트 생성
+            val intent = Intent(this, DiaryActivityViewPager::class.java)
+            startActivity(intent)
+        }
     }
 
 

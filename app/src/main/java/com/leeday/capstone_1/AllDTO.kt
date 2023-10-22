@@ -1,6 +1,7 @@
 package com.leeday.capstone_1
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class postQuestion(
@@ -32,14 +33,13 @@ data class Answer2(
     val waist : Boolean
 )
 
+data class CommentData(val id: Int, val content: String, val username: String)
+
 data class DiaryData(
     val subject: String,
     val content: String,
     val emotion: String
-)
-
-
-data class CommentData(val id: Int, val content: String, val username: String)
+) : Serializable
 
 
 

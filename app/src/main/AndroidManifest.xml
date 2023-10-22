@@ -18,7 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-
+        <activity
+            android:name=".DiaryActivityViewPager"
+            android:exported="false" />
+        <activity
+            android:name=".CheckDiary"
+            android:exported="false" />
         <activity
             android:name=".WriteDiary"
             android:exported="false" />
