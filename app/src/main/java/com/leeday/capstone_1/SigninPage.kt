@@ -52,7 +52,7 @@ class SigninPage : AppCompatActivity() {
             val postPassword2 = password2.text.toString()
             val postUsername = username.text.toString()
             val postBirthday = birthday.text.toString()
-            val postData = userInfo(
+            val postData = UserInfo(
                 user_loginid = postUserid, password1 = postPassword1,
                 password2 = postPassword2, username = postUsername,
                 birthday = postBirthday

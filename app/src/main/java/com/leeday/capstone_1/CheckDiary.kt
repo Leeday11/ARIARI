@@ -41,7 +41,8 @@ class CheckDiary : Fragment() {
         emotionTextView.text = diaryEntry.emotion
 
         // Random background setting
-        val backgrounds = arrayOf(R.drawable.diary1, R.drawable.diary2, R.drawable.diary4, R.drawable.diary5, R.drawable.diary6) // 원하는 배경 리소스를 추가하십시오
+        val backgrounds = arrayOf(R.drawable.diary1, R.drawable.diary2, R.drawable.diary3, R.drawable.diary4, R.drawable.diary5, R.drawable.diary6,
+                R.drawable.diary7, R.drawable.diary8, R.drawable.diary9, R.drawable.diary10, R.drawable.diary11, R.drawable.diary12, R.drawable.diary13) // 원하는 배경 리소스를 추가하십시오
         val randomBackground = backgrounds[(0 until backgrounds.size).random()]
 
         // Find the LinearLayout by its ID and set its background

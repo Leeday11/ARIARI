@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.data.LineData
@@ -18,9 +19,9 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class CheckGraph : AppCompatActivity() {
 
@@ -43,43 +44,75 @@ class CheckGraph : AppCompatActivity() {
         frequencyChart = findViewById(R.id.frequency_chart)
         musclepainChart = findViewById(R.id.musclepain_chart)
 
-//        // 첫 번째 그래프 데이터 로드
-//        apiService.getAnswers("Bearer " + globalVariable.accesstoken, answer).enqueue(object : Callback<JsonArray> {
-//            override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
-//                if (response.isSuccessful) {
-//                    val jsonArray = response.body()
-//
-//                    if (jsonArray != null && jsonArray.size() > 0) {
-//                        val jsonObject = jsonArray[0].asJsonObject
-//
-//                        val answer = Answer(
-//                            jsonObject.get("flushing_face").asInt,
-//                            jsonObject.get("sweating").asInt,
-//                            jsonObject.get("headache").asInt,
-//                            jsonObject.get("condition").asInt
-//                        )
-//
-//                        val labels = listOf("Flushing Face", "Sweating", "Headache", "Condition")
-//                        val values = listOf(answer.flushing_face, answer.sweating, answer.headache, answer.condition)
-//                        val entries = values.mapIndexed { index, value ->
-//                            Entry(index.toFloat(), value.toFloat())
-//                        }
-//
-//                        val dataSet = LineDataSet(entries, "Symptoms over Time")
-//                        dataSet.setDrawValues(false)
-//                        dataSet.setColors(*ColorTemplate.COLORFUL_COLORS)
-//
-//                        val lineData = LineData(dataSet)
-//                        frequencyChart.data = lineData
-//                        frequencyChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
-//                        frequencyChart.invalidate()
-//                    }
-//                }
-//            }
-//            override fun onFailure(call: Call<JsonArray>, t: Throwable) {
-//                Log.e("API_ERROR", t.message ?: "Unknown error")
-//            }
-//        })
+        apiService.getAnswers("Bearer " + globalVariable.accesstoken).enqueue(object : Callback<JsonArray> {
+            override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
+                if (response.isSuccessful) {
+                    val jsonArray = response.body()
+
+                    if (jsonArray != null && jsonArray.size() > 0) {
+                        val flushingFaceValues = ArrayList<Entry>()
+                        val sweatingValues = ArrayList<Entry>()
+                        val headacheValues = ArrayList<Entry>()
+                        val conditionValues = ArrayList<Entry>()
+
+                        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        val targetFormat = SimpleDateFormat("MM/dd", Locale.getDefault())
+                        val labels = ArrayList<String>()
+
+                        jsonArray.forEachIndexed { index, jsonElement ->
+                            val jsonObject = jsonElement.asJsonObject
+                            val date = jsonObject.get("create_date").asString.split("T")[0] // 날짜만 가져옴
+                            val dateMillis = dateFormat.parse(date).time.toFloat()
+
+                            val formattedDate = targetFormat.format(dateFormat.parse(date))
+                            labels.add(formattedDate)
+
+                            flushingFaceValues.add(Entry(dateMillis, jsonObject.get("flushing_face").asFloat))
+                            sweatingValues.add(Entry(dateMillis, jsonObject.get("sweating").asFloat))
+                            headacheValues.add(Entry(dateMillis, jsonObject.get("headache").asFloat))
+                            conditionValues.add(Entry(dateMillis, jsonObject.get("condition").asFloat))
+                        }
+
+                        val flushingFaceDataSet = LineDataSet(flushingFaceValues, "Flushing Face").apply {
+                            setDrawValues(false)
+                            color = Color.RED
+                        }
+                        val sweatingDataSet = LineDataSet(sweatingValues, "Sweating").apply {
+                            setDrawValues(false)
+                            color = Color.BLUE
+                        }
+                        val headacheDataSet = LineDataSet(headacheValues, "Headache").apply {
+                            setDrawValues(false)
+                            color = Color.GREEN
+                        }
+                        val conditionDataSet = LineDataSet(conditionValues, "Condition").apply {
+                            setDrawValues(false)
+                            color = Color.YELLOW
+                        }
+
+                        val lineData = LineData(flushingFaceDataSet, sweatingDataSet, headacheDataSet, conditionDataSet)
+                        frequencyChart.data = lineData
+
+                        val xAxis = frequencyChart.xAxis
+                        xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+                        xAxis.granularity = 1f
+                        xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+                        frequencyChart.axisLeft.axisMinimum = 0f
+                        frequencyChart.axisLeft.axisMaximum = 5f
+                        frequencyChart.axisLeft.granularity = 1f
+                        frequencyChart.axisRight.isEnabled = false
+
+                        frequencyChart.invalidate()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonArray>, t: Throwable) {
+                Log.e("API_ERROR", t.message ?: "Unknown error")
+            }
+        })
+
 
         // 두 번째 그래프 데이터 로드
         apiService.getAnswers2("Bearer " + globalVariable.accesstoken)

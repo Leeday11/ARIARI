@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -99,49 +98,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-//class MainActivity : AppCompatActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-
-//        val btnLogin = findViewById<Button>(R.id.btn_login)
-//        val idInput = findViewById<EditText>(R.id.ID_input)
-//        val pwInput = findViewById<EditText>(R.id.PW_input)
-//        btnLogin.setOnClickListener {
-//            val id = idInput.text.toString()
-//            val password = pwInput.text.toString()
-//            if (id.isEmpty() || password.isEmpty()) {
-//                Toast.makeText(this, "아이디와 비밀번호를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//            login(id, password)
-//        }
-//        val btn_signin = findViewById<Button>(R.id.btn_account)
-//        btn_signin.setOnClickListener {
-//            // 다른 액티비티로 이동하는 인텐트 생성
-//            val intent = Intent(this, SigninPage::class.java)
-//            startActivity(intent)
-//        }
-//    }
-//
-//    private fun login(id: String, password: String) {
-//        api.login(UserInfo(user_loginid = id, password1 = password)).enqueue(object : Callback<LoginResponse> {
-//            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                if (response.isSuccessful) {
-//                    val loginResponse = response.body()
-//                    if (loginResponse?.success == true) {
-//                        Toast.makeText(this@MainActivity, "로그인 성공!", Toast.LENGTH_SHORT).show()
-//                    } else {
-//                        Toast.makeText(this@MainActivity, loginResponse?.message ?: "오류 발생", Toast.LENGTH_SHORT).show()
-//                    }
-//                } else {
-//                    Toast.makeText(this@MainActivity, "서버 오류", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                Toast.makeText(this@MainActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-//    }
-//}
