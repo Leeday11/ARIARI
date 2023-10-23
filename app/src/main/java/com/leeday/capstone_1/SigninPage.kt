@@ -68,8 +68,8 @@ class SigninPage : AppCompatActivity() {
                         dialog.setTitle("알람!")
                         dialog.setMessage("정상적으로 등록되었습니다!")
                         dialog.show()
+                        finish()
                     } else {
-
                         dialog.setMessage("회원가입 실패!")
                         dialog.show()
 

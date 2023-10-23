@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import android.widget.TextView
 
@@ -26,7 +27,6 @@ class CheckDiary : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.check_diary, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         diaryEntry = arguments?.getSerializable(ARG_DIARY) as DiaryData
@@ -39,5 +39,13 @@ class CheckDiary : Fragment() {
         subjectTextView.text = diaryEntry.subject
         contentTextView.text = diaryEntry.content
         emotionTextView.text = diaryEntry.emotion
+
+        // Random background setting
+        val backgrounds = arrayOf(R.drawable.diary1, R.drawable.diary2, R.drawable.diary4, R.drawable.diary5, R.drawable.diary6) // 원하는 배경 리소스를 추가하십시오
+        val randomBackground = backgrounds[(0 until backgrounds.size).random()]
+
+        // Find the LinearLayout by its ID and set its background
+        val layout = view.findViewById<LinearLayout>(R.id.check_diary)
+        layout.setBackgroundResource(randomBackground)
     }
 }

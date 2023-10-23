@@ -7,10 +7,8 @@ import java.io.Serializable
 data class postQuestion(
     @SerializedName("subject")
     val subject : String,
-
     @SerializedName("content")
     val content : String,
-
     @SerializedName("tag")
     val tag : String
 )

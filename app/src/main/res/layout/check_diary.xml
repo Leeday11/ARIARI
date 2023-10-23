@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingVertical="100dp"
-    android:paddingHorizontal="30dp">
+    android:paddingHorizontal="30dp"
+    android:id="@+id/check_diary">
 
     <TextView
         android:id="@+id/subjectTextView"

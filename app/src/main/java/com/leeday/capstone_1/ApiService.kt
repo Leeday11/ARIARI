@@ -24,6 +24,8 @@ interface ApiService {
     @POST("api/user/login")
     fun requestUserLogin(@Field("username") user_loginid : String, @Field("password") password : String) : Call<JsonObject>
 
+    //-------------------------------------------------------------------------------------------
+
     @POST("api/question/create")
     fun requestQuestionPost(
         @Header("Authorization") authorization : String,
@@ -35,6 +37,7 @@ interface ApiService {
     @GET("api/question/detail/{question_id}") // 경로는 실제 API 경로로 수정해야 합니다.
     fun getQuestionPostDetail(@Path("question_id") id: Int): Call<JsonObject>
 
+    //-------------------------------------------------------------------------------------------
 
     @POST("api/symptom/create")
     fun sendAnswers(
@@ -48,12 +51,13 @@ interface ApiService {
 
     @GET("api/symptom/list")
     fun getAnswers(
-        @Header("Authorization") authorization : String): Call<JsonObject>
+        @Header("Authorization") authorization : String): Call<JsonArray>
 
     @GET("api/physicalpain/list")
     fun getAnswers2(
         @Header("Authorization") authorization : String): Call<JsonArray> //여긴 왜 JsonArray로 해두었지...
 
+    //-------------------------------------------------------------------------------------------
 
     // 댓글 등록하기
     @POST("api/answer/create/{question_id}")
@@ -75,6 +79,7 @@ interface ApiService {
     @DELETE("api/answer/delete/{answer_id}")
     fun deleteComment(@Path("answer_id") commentId: Int): Call<JsonObject>
 
+    //-------------------------------------------------------------------------------------------
 
     // 다이어리 등록하기
     @POST("api/diary/create")

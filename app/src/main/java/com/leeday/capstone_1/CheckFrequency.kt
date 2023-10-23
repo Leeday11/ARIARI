@@ -63,7 +63,8 @@ class CheckFrequency : ComponentActivity() {
                                 globalVariable.username = result.get("username").asString
                             }
                             // 성공적으로 데이터가 전송되었을 때의 처리
-                            Toast.makeText(applicationContext, "success!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "저장되었습니다! :)", Toast.LENGTH_SHORT).show()
+                            finish()
                         } else {
                             val errorMessage = response.errorBody()?.string() ?: "Unknown error"
                             Toast.makeText(applicationContext, "Error: $errorMessage", Toast.LENGTH_SHORT).show()

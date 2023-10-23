@@ -100,7 +100,8 @@ class CheckMusclepain : AppCompatActivity() {
                                 globalVariable.username = result.get("username").asString
                             }
 
-                            Toast.makeText(applicationContext, "Data sent successfully!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "저장되었습니다! :)", Toast.LENGTH_SHORT).show()
+                            finish()
                         } else {
                             val errorMessage = response.errorBody()?.string() ?: "Unknown error"
                             Toast.makeText(applicationContext, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
