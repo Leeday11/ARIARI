@@ -17,7 +17,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @POST("api/user/create")
-    fun requestPostUser(@Body postData : UserInfo) : Call<JsonObject>
+    fun requestPostUser(@Body postData : userInfo) : Call<JsonObject>
 
     @FormUrlEncoded
     @POST("api/user/login")
