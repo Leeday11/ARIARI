@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class CheckGraph : AppCompatActivity() {
-
     private lateinit var frequencyChart: LineChart
     private lateinit var musclepainChart: PieChart
 
@@ -44,6 +43,9 @@ class CheckGraph : AppCompatActivity() {
         frequencyChart = findViewById(R.id.frequency_chart)
         musclepainChart = findViewById(R.id.musclepain_chart)
 
+        frequencyChart.setBackgroundColor(Color.WHITE)
+        musclepainChart.setBackgroundColor(Color.WHITE)
+
         apiService.getAnswers("Bearer " + globalVariable.accesstoken).enqueue(object : Callback<JsonArray> {
             override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
                 if (response.isSuccessful) {
@@ -61,33 +63,43 @@ class CheckGraph : AppCompatActivity() {
 
                         jsonArray.forEachIndexed { index, jsonElement ->
                             val jsonObject = jsonElement.asJsonObject
-                            val date = jsonObject.get("create_date").asString.split("T")[0] // 날짜만 가져옴
-                            val dateMillis = dateFormat.parse(date).time.toFloat()
+                            val date = jsonObject.get("create_date").asString.split("T")[0]
+                            //val dateMillis = dateFormat.parse(date).time.toFloat()
 
                             val formattedDate = targetFormat.format(dateFormat.parse(date))
                             labels.add(formattedDate)
 
-                            flushingFaceValues.add(Entry(dateMillis, jsonObject.get("flushing_face").asFloat))
-                            sweatingValues.add(Entry(dateMillis, jsonObject.get("sweating").asFloat))
-                            headacheValues.add(Entry(dateMillis, jsonObject.get("headache").asFloat))
-                            conditionValues.add(Entry(dateMillis, jsonObject.get("condition").asFloat))
+                            // Use index as X value
+                            flushingFaceValues.add(Entry(index.toFloat(), jsonObject.get("flushing_face").asFloat))
+                            sweatingValues.add(Entry(index.toFloat(), jsonObject.get("sweating").asFloat))
+                            headacheValues.add(Entry(index.toFloat(), jsonObject.get("headache").asFloat))
+                            conditionValues.add(Entry(index.toFloat(), jsonObject.get("condition").asFloat))
                         }
 
                         val flushingFaceDataSet = LineDataSet(flushingFaceValues, "Flushing Face").apply {
                             setDrawValues(false)
-                            color = Color.RED
+                            color = Color.parseColor("#F7A3A7")
+                            setCircleColor(Color.parseColor("#F7A3A7"))
+                            lineWidth = 2f
                         }
                         val sweatingDataSet = LineDataSet(sweatingValues, "Sweating").apply {
                             setDrawValues(false)
-                            color = Color.BLUE
+                            color = Color.parseColor("#FAD89E")
+                            setCircleColor(Color.parseColor("#FAD89E"))
+                            lineWidth = 2f
+
                         }
                         val headacheDataSet = LineDataSet(headacheValues, "Headache").apply {
                             setDrawValues(false)
-                            color = Color.GREEN
+                            color = Color.parseColor("#C8D7C4")
+                            setCircleColor(Color.parseColor("#C8D7C4"))
+                            lineWidth = 2f
                         }
                         val conditionDataSet = LineDataSet(conditionValues, "Condition").apply {
                             setDrawValues(false)
-                            color = Color.YELLOW
+                            color = Color.parseColor("#BBCBD2")
+                            setCircleColor(Color.parseColor("#BBCBD2"))
+                            lineWidth = 2f
                         }
 
                         val lineData = LineData(flushingFaceDataSet, sweatingDataSet, headacheDataSet, conditionDataSet)
@@ -102,7 +114,6 @@ class CheckGraph : AppCompatActivity() {
                         frequencyChart.axisLeft.axisMaximum = 5f
                         frequencyChart.axisLeft.granularity = 1f
                         frequencyChart.axisRight.isEnabled = false
-
                         frequencyChart.invalidate()
                     }
                 }
@@ -112,6 +123,7 @@ class CheckGraph : AppCompatActivity() {
                 Log.e("API_ERROR", t.message ?: "Unknown error")
             }
         })
+
 
 
         // 두 번째 그래프 데이터 로드
