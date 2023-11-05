@@ -110,15 +110,15 @@ class WritePhoto : ComponentActivity() {
             val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
 
             // Retrofit을 사용하여 이미지를 업로드합니다.
-            apiService.getphoto("Bearer ${globalVariable.accesstoken}", body).enqueue(object : Callback<JsonObject> {
+            apiService.savePhoto("Bearer ${globalVariable.accesstoken}", body).enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-                        // Handle success
-                        val responseBody = response.body()
-                        // TODO: Do something with the response body
+                        // Server response indicates success
+                        Toast.makeText(applicationContext, "사진이 저장되었습니다!", Toast.LENGTH_LONG).show()
+                        finish() // Ends the current activity and goes back to the previous one
                     } else {
                         // Handle request error
-                        Toast.makeText(applicationContext, "Upload failed: ${response.errorBody()?.string()}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, "사진 전송이 실패하였습니다 :(", Toast.LENGTH_LONG).show()
                     }
                 }
 

@@ -65,9 +65,6 @@ data class DiaryData(
 
 
 
-
-
-
 data class User(val id: Int, val user_loginid: String, val username: String)
 
 data class ResponseData(

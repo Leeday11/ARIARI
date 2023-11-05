@@ -4,6 +4,7 @@ package com.leeday.capstone_1
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -96,10 +97,18 @@ interface ApiService {
     // 사진 등록하기
     @Multipart
     @POST("api/imdiary/create")
-    fun getphoto(@Header("Authorization") token: String, @Part image: MultipartBody.Part): Call<JsonObject>
+    fun savePhoto(@Header("Authorization") token: String, @Part image: MultipartBody.Part): Call<JsonObject>
 
 
-    // 사진 가져오기
+    // 사진 가져오기(경로, 생성일자 받아오는거고)
+    @GET("api/imdiary/list")
+    fun getPhoto(@Header("Authorization") token: String): Call<JsonArray>
+
+
+    // 사진 가져오기(경로를 넣어서, 사진 파일 가져오기)
+    @GET("api/imdiary/get_images/{file_name}")
+    fun getPhotoFile(@Path("file_name") fileName: String, @Header("Authorization") token: String): Call<ResponseBody>
+
 
 
 }
