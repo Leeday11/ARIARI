@@ -1,34 +1,55 @@
+// CheckPhotoFragment.kt
 package com.leeday.capstone_1
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.ComponentActivity
+import androidx.fragment.app.Fragment
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import android.graphics.BitmapFactory
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
-
-class CheckPhoto : ComponentActivity() {
+class CheckPhoto : Fragment() {
 
     private lateinit var imageView: ImageView
     private lateinit var textViewDate: TextView
     private lateinit var apiService: ApiService
     private lateinit var globalVariable: GlobalVariable
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.check_photo)
+    companion object {
+        private const val EXTRA_CREATE_DATE = "EXTRA_CREATE_DATE"
+        private const val EXTRA_IMAGE_PATH = "EXTRA_IMAGE_PATH"
 
-        imageView = findViewById(R.id.checkPhotoView)
-        textViewDate = findViewById(R.id.dateTextView)
-        globalVariable = getApplication() as GlobalVariable
+        fun newInstance(createDate: String, imagePath: String): CheckPhoto {
+            val fragment = CheckPhoto()
+            val args = Bundle()
+            args.putString(EXTRA_CREATE_DATE, createDate)
+            args.putString(EXTRA_IMAGE_PATH, imagePath)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.check_photo, container, false)
+        imageView = view.findViewById(R.id.checkPhotoView)
+        textViewDate = view.findViewById(R.id.dateTextView)
+        globalVariable = activity?.application as GlobalVariable
 
         val retrofit = Retrofit.Builder()
             .baseUrl(globalVariable.api_url)
@@ -36,34 +57,33 @@ class CheckPhoto : ComponentActivity() {
             .build()
         apiService = retrofit.create(ApiService::class.java)
 
-        // 특정 사진 정보를 로드합니다.
-        loadPhotoList()
-    }
+        arguments?.let { bundle ->
+            val createDate = bundle.getString(EXTRA_CREATE_DATE)
+            val imagePath = bundle.getString(EXTRA_IMAGE_PATH)
 
-    private fun loadPhotoList() {
-        apiService.getPhoto("Bearer " + globalVariable.accesstoken)
-            .enqueue(object : Callback<JsonArray> {
-                override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
-                    if (response.isSuccessful) {
-                        // 첫 번째 사진 정보만 가져오는 예시입니다.
-                        // 필요에 따라 목록에서 특정 항목을 선택하는 로직을 추가해야 합니다.
-                        val photoInfo = response.body()?.get(0)?.asJsonObject
-                        val createDate = photoInfo?.get("create_date")?.asString
-                        val imageName = photoInfo?.get("image")?.asString
-
-                        textViewDate.text = createDate
-
-                        // 이미지 이름을 사용하여 사진 파일을 로드합니다.
-                        imageName?.let { loadImage(it) }
-                    } else {
-                        // 오류 처리
+            // 'createDate'를 파싱하고 원하는 형식으로 포맷합니다.
+            createDate?.let {
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("MM월 dd일의 기록", Locale.getDefault())
+                try {
+                    val date = inputFormat.parse(createDate)
+                    date?.let {
+                        val formattedDate = outputFormat.format(date)
+                        textViewDate.text = formattedDate
+                    } ?: run {
+                        textViewDate.text = "Unknown Date"
                     }
+                } catch (e: ParseException) {
+                    textViewDate.text = "Unknown Date"
                 }
+            } ?: run {
+                textViewDate.text = "Unknown Date"
+            }
 
-                override fun onFailure(call: Call<JsonArray>, t: Throwable) {
-                    // 네트워크 오류 처리
-                }
-            })
+            imagePath?.let { loadImage(it) }
+        }
+
+        return view
     }
 
     private fun loadImage(imageName: String) {
@@ -75,10 +95,8 @@ class CheckPhoto : ComponentActivity() {
                         val inputStream = response.body()?.byteStream()
                         val bitmap = BitmapFactory.decodeStream(inputStream)
 
-                        // UI 스레드에서 ImageView에 Bitmap을 설정합니다
-                        runOnUiThread {
-                            imageView.setImageBitmap(bitmap)
-                        }
+                        // ImageView에 Bitmap을 설정합니다
+                        imageView.setImageBitmap(bitmap)
                     } else {
                         // 오류 처리
                     }
@@ -89,7 +107,4 @@ class CheckPhoto : ComponentActivity() {
                 }
             })
     }
-
-
-
 }

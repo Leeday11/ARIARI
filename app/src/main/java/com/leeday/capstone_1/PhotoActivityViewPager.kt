@@ -39,19 +39,15 @@ class PhotoActivityViewPager : AppCompatActivity() {
                 override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
                     if (response.isSuccessful) {
                         // JSON 응답을 파싱하여 'create_date'와 'image' 정보를 가져옵니다.
-                        val photos = response.body()?.map { jsonElement ->
+                        val photosList = response.body()?.map { jsonElement ->
                             val jsonObject = jsonElement.asJsonObject
                             val createDate = jsonObject["create_date"].asString
                             val imagePath = jsonObject["image"].asString
-                            // 각 사진의 createDate와 imagePath를 이용하여 UI를 업데이트하는 로직을 여기에 구현합니다.
-                            // 이 예시에서는 간단히 이 데이터를 로그로 출력하고 있습니다.
-                            Log.d("PHOTO_INFO", "Date: $createDate, Image Path: $imagePath")
-                            // TODO: imagePath로 이미지를 로딩하고 createDate를 표시하는 로직 추가
-                        } ?: emptyList()
+                            Pair(createDate, imagePath) // Pair 객체를 만들어 List에 추가합니다.
+                        } ?: emptyList<Pair<String, String>>()
 
-                        // 여기에서 ViewPager의 Adapter를 설정하는 등 UI 업데이트를 수행합니다.
-                        // viewPager.adapter = ...
-
+                        // ViewPager의 Adapter를 설정합니다.
+                        viewPager.adapter = PhotoViewPager(photosList, supportFragmentManager)
                     } else {
                         Log.e("API_ERROR", "Response not successful")
                         // 오류 처리
@@ -64,4 +60,5 @@ class PhotoActivityViewPager : AppCompatActivity() {
                 }
             })
     }
+
 }

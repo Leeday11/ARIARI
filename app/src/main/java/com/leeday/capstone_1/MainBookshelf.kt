@@ -34,7 +34,7 @@ class MainBookshelf : AppCompatActivity() {
         val btn_checkphoto = findViewById<ImageButton>(R.id.check_photodiary)
         btn_checkphoto.setOnClickListener {
             // 다른 액티비티로 이동하는 인텐트 생성
-            val intent = Intent(this, CheckPhoto::class.java)
+            val intent = Intent(this, PhotoActivityViewPager::class.java)
             startActivity(intent)
         }
     }

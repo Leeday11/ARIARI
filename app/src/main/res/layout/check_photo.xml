@@ -5,20 +5,18 @@
     android:orientation="vertical"
     android:paddingVertical="100dp"
     android:paddingHorizontal="30dp"
-    android:id="@+id/check_diary"
-    android:background="@color/background">
+    android:id="@+id/check_diary">
 
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="00월 00일의 기록"
-        android:textSize="28sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:background="@drawable/rounded_background" />
-
+        android:background="@color/white" />
 
     <ImageView
         android:id="@+id/checkPhotoView"
