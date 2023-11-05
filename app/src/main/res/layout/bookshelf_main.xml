@@ -7,14 +7,15 @@
     android:background="@color/background">
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
         android:src="@drawable/diary_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/diary_header"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/diary_header" />
 
     <ImageView
         android:id="@+id/diary_header"
@@ -49,6 +50,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <ImageButton
+        android:id="@+id/check_photodiary"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="70dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/check_photodiary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <ImageButton
+        android:id="@+id/upload_photo"
+        android:layout_width="130dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="98dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/upload_photo"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"

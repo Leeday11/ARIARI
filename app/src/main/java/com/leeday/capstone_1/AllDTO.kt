@@ -1,6 +1,7 @@
 package com.leeday.capstone_1
 
 import com.google.gson.annotations.SerializedName
+import java.io.File
 import java.io.Serializable
 
 data class userInfo(
@@ -54,6 +55,15 @@ data class DiaryData(
     val content: String,
     val emotion: String
 ) : Serializable
+
+
+
+
+
+
+
+
+
 
 
 

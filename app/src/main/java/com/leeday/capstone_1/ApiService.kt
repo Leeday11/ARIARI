@@ -3,6 +3,7 @@ package com.leeday.capstone_1
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -10,8 +11,10 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -87,5 +90,16 @@ interface ApiService {
     // 다이어리 가져오기
     @GET("api/diary/list")
     fun getDiary(@Header("Authorization") token: String): Call<JsonArray>
+
+    //-------------------------------------------------------------------------------------------
+
+    // 사진 등록하기
+    @Multipart
+    @POST("api/imdiary/create")
+    fun getphoto(@Header("Authorization") token: String, @Part image: MultipartBody.Part): Call<JsonObject>
+
+
+    // 사진 가져오기
+
 
 }

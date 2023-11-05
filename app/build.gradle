@@ -54,6 +54,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0' // 여기서 버전은 사용하는 OkHttp 라이브러리의 버전과 일치해야 합니다.
+
 
 
     // retrofit2 연동

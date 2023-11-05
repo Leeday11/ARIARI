@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background">
+
+    <ImageView
+        android:id="@+id/diary_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/diary_header"
+        android:adjustViewBounds="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/uploaded_image"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:src="@drawable/empty_photo"
+        android:background="@color/white"
+        android:padding="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/diary_header" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_pick_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"
+        android:letterSpacing="-0.05"
+        android:text="  📷 사진 가져오기  "
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/brown_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/uploaded_image"
+        app:layout_constraintEnd_toEndOf="@id/uploaded_image"
+        app:layout_constraintStart_toStartOf="@id/uploaded_image"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_diary"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/btn_background"
+        android:letterSpacing="-0.05"
+        android:text="사진 업로드"
+        android:textColor="@color/brown_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploaded_image" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
