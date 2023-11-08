@@ -17,7 +17,7 @@ class ChatbotWeb : ComponentActivity() {
 //        globalVariable = getApplication() as GlobalVariable
 
         val web: WebView = findViewById(R.id.chatbot_web)
-        val url : String = "http://myip...:8000"  //ipconfig해서, ipv4 내 아이피 넣어서 하면 됨.
+        val url : String = "http://192.168.35.62:8000"  //ipconfig해서, ipv4 내 아이피 넣어서 하면 됨.
 
 
         web.webChromeClient = WebChromeClient()     //크롬으로!

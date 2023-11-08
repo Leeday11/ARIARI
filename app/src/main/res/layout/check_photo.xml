@@ -3,28 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingVertical="100dp"
-    android:paddingHorizontal="30dp"
+    android:paddingVertical="15dp"
+    android:paddingHorizontal="15dp"
+    android:background="@color/background"
     android:id="@+id/check_diary">
+
+
+    <ImageView
+        android:id="@+id/community_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/checkphoto_header"
+        android:layout_marginBottom="15dp"
+        android:adjustViewBounds="true"/>
+
+
+    <ImageView
+        android:id="@+id/checkPhotoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15sp"
+        android:paddingHorizontal="15sp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_background"/>
 
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="00월 00일의 기록"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:background="@color/white" />
-
-    <ImageView
-        android:id="@+id/checkPhotoView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="@drawable/rounded_background" />
 
 
 </LinearLayout>
