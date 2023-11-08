@@ -35,7 +35,7 @@ interface ApiService {
         @Body postData:postQuestion) : Call<JsonObject>       //Call<ResponseBody> : output
 
     @GET("api/question/list")
-    fun getQuestionPost(@Query("tag") tag : String) : Call<JsonObject>       //Call<ResponseBody> : output
+    fun getQuestionPost(@Query("tag") tag : String, @Query("size") size : Int) : Call<JsonObject>       //Call<ResponseBody> : output
 
     @GET("api/question/detail/{question_id}") // 경로는 실제 API 경로로 수정해야 합니다.
     fun getQuestionPostDetail(@Path("question_id") id: Int): Call<JsonObject>

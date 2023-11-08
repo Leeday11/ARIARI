@@ -39,7 +39,7 @@ class BoardRecipe : ComponentActivity() {
     }
 
     private fun loadPosts(apiService: ApiService) {
-        apiService.getQuestionPost("recipe").enqueue(object: Callback<JsonObject> {
+        apiService.getQuestionPost("recipe",20).enqueue(object: Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     response.body()?.getAsJsonArray("question_list")?.let {

@@ -39,7 +39,7 @@ class BoardFree : ComponentActivity() {
     }
 
     private fun loadPosts(apiService: ApiService) {
-        apiService.getQuestionPost("all").enqueue(object: Callback<JsonObject> {
+        apiService.getQuestionPost("all", 20).enqueue(object: Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     response.body()?.getAsJsonArray("question_list")?.let {

@@ -65,6 +65,7 @@ class WriteCommunity : ComponentActivity() {
 
                     if (response.isSuccessful) {
                         Toast.makeText(this@WriteCommunity, "정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show()
+                        finish()
                     } else {
                         when(response.code()) {
                             401 -> Toast.makeText(this@WriteCommunity, "로그인이 필요합니다!", Toast.LENGTH_SHORT).show()

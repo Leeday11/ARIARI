@@ -39,7 +39,7 @@ class BoardShareinfo : ComponentActivity() {
     }
 
     private fun loadPosts(apiService: ApiService) {
-        apiService.getQuestionPost("shareinfo").enqueue(object: Callback<JsonObject> {
+        apiService.getQuestionPost("shareinfo",20).enqueue(object: Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     response.body()?.getAsJsonArray("question_list")?.let {
