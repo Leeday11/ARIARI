@@ -76,26 +76,26 @@ class CheckGraph : AppCompatActivity() {
                             conditionValues.add(Entry(index.toFloat(), jsonObject.get("condition").asFloat))
                         }
 
-                        val flushingFaceDataSet = LineDataSet(flushingFaceValues, "Flushing Face").apply {
+                        val flushingFaceDataSet = LineDataSet(flushingFaceValues, "안면홍조").apply {
                             setDrawValues(false)
                             color = Color.parseColor("#F7A3A7")
                             setCircleColor(Color.parseColor("#F7A3A7"))
                             lineWidth = 2f
                         }
-                        val sweatingDataSet = LineDataSet(sweatingValues, "Sweating").apply {
+                        val sweatingDataSet = LineDataSet(sweatingValues, "발한").apply {
                             setDrawValues(false)
                             color = Color.parseColor("#FAD89E")
                             setCircleColor(Color.parseColor("#FAD89E"))
                             lineWidth = 2f
 
                         }
-                        val headacheDataSet = LineDataSet(headacheValues, "Headache").apply {
+                        val headacheDataSet = LineDataSet(headacheValues, "두통/어지럼증").apply {
                             setDrawValues(false)
                             color = Color.parseColor("#C8D7C4")
                             setCircleColor(Color.parseColor("#C8D7C4"))
                             lineWidth = 2f
                         }
-                        val conditionDataSet = LineDataSet(conditionValues, "Condition").apply {
+                        val conditionDataSet = LineDataSet(conditionValues, "컨디션").apply {
                             setDrawValues(false)
                             color = Color.parseColor("#BBCBD2")
                             setCircleColor(Color.parseColor("#BBCBD2"))
@@ -105,10 +105,13 @@ class CheckGraph : AppCompatActivity() {
                         val lineData = LineData(flushingFaceDataSet, sweatingDataSet, headacheDataSet, conditionDataSet)
                         frequencyChart.data = lineData
 
+                        labels.reverse()
+
                         val xAxis = frequencyChart.xAxis
                         xAxis.valueFormatter = IndexAxisValueFormatter(labels)
                         xAxis.granularity = 1f
                         xAxis.position = XAxis.XAxisPosition.BOTTOM
+
 
                         frequencyChart.axisLeft.axisMinimum = 0f
                         frequencyChart.axisLeft.axisMaximum = 5f
@@ -159,14 +162,14 @@ class CheckGraph : AppCompatActivity() {
 
                         // PieEntry 리스트 생성
                         val pieEntries = listOf(
-                            PieEntry(shoulderCount.toFloat(), "Shoulder"),
-                            PieEntry(elbowCount.toFloat(), "Elbow"),
-                            PieEntry(fingerCount.toFloat(), "Finger"),
-                            PieEntry(wristCount.toFloat(), "Wrist"),
-                            PieEntry(jointCount.toFloat(), "Joint"),
-                            PieEntry(kneeCount.toFloat(), "Knee"),
-                            PieEntry(ankleCount.toFloat(), "Ankle"),
-                            PieEntry(waistCount.toFloat(), "Waist")
+                            PieEntry(shoulderCount.toFloat(), "어깨"),
+                            PieEntry(elbowCount.toFloat(), "팔꿈치"),
+                            PieEntry(fingerCount.toFloat(), "손가락"),
+                            PieEntry(wristCount.toFloat(), "손목"),
+                            PieEntry(jointCount.toFloat(), "고관절"),
+                            PieEntry(kneeCount.toFloat(), "무릎"),
+                            PieEntry(ankleCount.toFloat(), "발목"),
+                            PieEntry(waistCount.toFloat(), "허리")
                         )
 
                         // 사용자 정의 색상 배열 (16진수 색상 코드 사용)
