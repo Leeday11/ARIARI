@@ -32,7 +32,6 @@ class CheckGraph : AppCompatActivity() {
         setContentView(R.layout.record_graph)
 
         val globalVariable = getApplication() as GlobalVariable
-
         val retrofit = Retrofit.Builder()
             .baseUrl(globalVariable.api_url)
             .addConverterFactory(GsonConverterFactory.create())
@@ -50,13 +49,11 @@ class CheckGraph : AppCompatActivity() {
             override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
                 if (response.isSuccessful) {
                     val jsonArray = response.body()
-
                     if (jsonArray != null && jsonArray.size() > 0) {
                         val flushingFaceValues = ArrayList<Entry>()
                         val sweatingValues = ArrayList<Entry>()
                         val headacheValues = ArrayList<Entry>()
                         val conditionValues = ArrayList<Entry>()
-
                         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                         val targetFormat = SimpleDateFormat("MM/dd", Locale.getDefault())
                         val labels = ArrayList<String>()
@@ -65,17 +62,14 @@ class CheckGraph : AppCompatActivity() {
                             val jsonObject = jsonElement.asJsonObject
                             val date = jsonObject.get("create_date").asString.split("T")[0]
                             //val dateMillis = dateFormat.parse(date).time.toFloat()
-
                             val formattedDate = targetFormat.format(dateFormat.parse(date))
                             labels.add(formattedDate)
-
                             // Use index as X value
                             flushingFaceValues.add(Entry(index.toFloat(), jsonObject.get("flushing_face").asFloat))
                             sweatingValues.add(Entry(index.toFloat(), jsonObject.get("sweating").asFloat))
                             headacheValues.add(Entry(index.toFloat(), jsonObject.get("headache").asFloat))
                             conditionValues.add(Entry(index.toFloat(), jsonObject.get("condition").asFloat))
                         }
-
                         val flushingFaceDataSet = LineDataSet(flushingFaceValues, "안면홍조").apply {
                             setDrawValues(false)
                             color = Color.parseColor("#F7A3A7")
@@ -87,7 +81,6 @@ class CheckGraph : AppCompatActivity() {
                             color = Color.parseColor("#FAD89E")
                             setCircleColor(Color.parseColor("#FAD89E"))
                             lineWidth = 2f
-
                         }
                         val headacheDataSet = LineDataSet(headacheValues, "두통/어지럼증").apply {
                             setDrawValues(false)
@@ -104,14 +97,13 @@ class CheckGraph : AppCompatActivity() {
 
                         val lineData = LineData(flushingFaceDataSet, sweatingDataSet, headacheDataSet, conditionDataSet)
                         frequencyChart.data = lineData
-
+                        //먼저 등록된 데이터를 앞에 띄우기 위해 reverse를 해줌
                         labels.reverse()
 
                         val xAxis = frequencyChart.xAxis
                         xAxis.valueFormatter = IndexAxisValueFormatter(labels)
                         xAxis.granularity = 1f
                         xAxis.position = XAxis.XAxisPosition.BOTTOM
-
 
                         frequencyChart.axisLeft.axisMinimum = 0f
                         frequencyChart.axisLeft.axisMaximum = 5f
@@ -121,7 +113,6 @@ class CheckGraph : AppCompatActivity() {
                     }
                 }
             }
-
             override fun onFailure(call: Call<JsonArray>, t: Throwable) {
                 Log.e("API_ERROR", t.message ?: "Unknown error")
             }
@@ -136,7 +127,6 @@ class CheckGraph : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val jsonArray = response.body()
                         val totalCount = jsonArray?.size() ?: 0
-
                         // 각 부위별 카운트 초기화
                         var shoulderCount = 0
                         var elbowCount = 0
@@ -146,7 +136,6 @@ class CheckGraph : AppCompatActivity() {
                         var kneeCount = 0
                         var ankleCount = 0
                         var waistCount = 0
-
                         // JsonArray를 순회하며 누적값 계산
                         for (i in 0 until totalCount) {
                             val jsonObject = jsonArray?.get(i)?.asJsonObject
@@ -159,7 +148,6 @@ class CheckGraph : AppCompatActivity() {
                             if (jsonObject?.get("ankle")?.asBoolean == true) ankleCount++
                             if (jsonObject?.get("waist")?.asBoolean == true) waistCount++
                         }
-
                         // PieEntry 리스트 생성
                         val pieEntries = listOf(
                             PieEntry(shoulderCount.toFloat(), "어깨"),
@@ -171,7 +159,6 @@ class CheckGraph : AppCompatActivity() {
                             PieEntry(ankleCount.toFloat(), "발목"),
                             PieEntry(waistCount.toFloat(), "허리")
                         )
-
                         // 사용자 정의 색상 배열 (16진수 색상 코드 사용)
                         val customColors = listOf(
                             Color.parseColor("#F7A3A7"),  // 빨간색
@@ -185,7 +172,6 @@ class CheckGraph : AppCompatActivity() {
                         )
                         // 파이차트 데이터셋 생성 및 적용
                         val pieDataSet = PieDataSet(pieEntries, "Pain Distribution")
-
                         // 사용자 정의 색상 사용
                         pieDataSet.colors = customColors
 

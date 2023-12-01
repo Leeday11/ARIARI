@@ -74,20 +74,13 @@ class CheckMusclepain : AppCompatActivity() {
         button.setOnClickListener {
             if (isAnyButtonSelected()) {
                 val answer2 = Answer2(
-                    wrist  = buttonSelected[0],
-                    finger  = buttonSelected[1],
-                    shoulder = buttonSelected[2],
-                    elbow = buttonSelected[3],
-                    waist = buttonSelected[4],
-                    joint = buttonSelected[5],
-                    knee = buttonSelected[6],
-                    ankle = buttonSelected[7]
-                )
+                    wrist  = buttonSelected[0], finger  = buttonSelected[1], shoulder = buttonSelected[2],
+                    elbow = buttonSelected[3],waist = buttonSelected[4], joint = buttonSelected[5],
+                    knee = buttonSelected[6], ankle = buttonSelected[7])
 
                 val selectedIndexes = buttonSelected.mapIndexed { index, isSelected ->
                     if (isSelected) index else null
                 }.filterNotNull()
-
 
                 apiService.sendAnswers2("Bearer " + globalVariable.accesstoken, answer2).enqueue(object :
                     Callback<JsonObject> {
@@ -117,12 +110,9 @@ class CheckMusclepain : AppCompatActivity() {
             }
         }
     }
-
     private fun isAnyButtonSelected(): Boolean {
         return buttonSelected.any { it }
     }
-
-
     private fun updateButtonBackground(button: ImageButton, index: Int) {
         if (buttonSelected[index]) {
             button.setBackgroundColor(Color.LTGRAY)  // 선택됐을 때의 배경색

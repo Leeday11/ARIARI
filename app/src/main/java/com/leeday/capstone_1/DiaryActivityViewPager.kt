@@ -21,7 +21,6 @@ class DiaryActivityViewPager : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.diary_activity_viewpager)
         globalVariable = getApplication() as GlobalVariable
-
         viewPager = findViewById(R.id.viewPager)
 
         val retrofit = Retrofit.Builder()
@@ -29,12 +28,11 @@ class DiaryActivityViewPager : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         apiService = retrofit.create(ApiService::class.java)
-
         loadDiaries()
     }
 
-    private fun loadDiaries() { // diaryId 파라미터 제거
-        apiService.getDiary("Bearer " + globalVariable.accesstoken) // 함수 이름 및 파라미터 수정
+    private fun loadDiaries() {
+        apiService.getDiary("Bearer " + globalVariable.accesstoken)
             .enqueue(object : Callback<JsonArray> {
                 override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
                     if (response.isSuccessful) {
@@ -48,15 +46,11 @@ class DiaryActivityViewPager : AppCompatActivity() {
                                 diaryJsonObject.asJsonObject["emotion"].asString
                             )
                         } ?: emptyList()
-
                         viewPager.adapter = DiaryPagerAdapter(diaries, supportFragmentManager)
                     } else {
-                        // 오류 처리
                     }
                 }
-
                 override fun onFailure(call: Call<JsonArray>, t: Throwable) {
-                    // 네트워크 오류 처리
                 }
             })
     }

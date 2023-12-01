@@ -19,35 +19,28 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         // 전역 변수 호출
         val globalVariable = getApplication() as GlobalVariable
-
         val retrofit = Retrofit.Builder()
             .baseUrl(globalVariable.api_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         val apiService : ApiService = retrofit.create(ApiService::class.java)
-
         val user_loginid : EditText = findViewById(R.id.ID_input)
         val password : EditText = findViewById(R.id.PW_input)
         val btn_login : Button = findViewById(R.id.btn_login)
-
         val btn_signin = findViewById<Button>(R.id.btn_account)
         btn_signin.setOnClickListener {
             // 다른 액티비티로 이동하는 인텐트 생성
             val intent = Intent(this, SigninPage::class.java)
             startActivity(intent)
         }
-
-        //테스트 버튼! 나중에 삭제해야함.
+        //테스트 버튼
         val btn_test = findViewById<Button>(R.id.test_button)
         btn_test.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
-
 
         val dialog = AlertDialog.Builder(this@MainActivity)
 

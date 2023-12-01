@@ -104,12 +104,10 @@ class WritePhoto : ComponentActivity() {
             inputStream.copyTo(outputStream)
             outputStream.close()
             inputStream.close()
-
-            // 여기에서 MultipartBody.Part를 생성합니다
+            // 여기에서 MultipartBody.Part를 생성
             val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
-
-            // Retrofit을 사용하여 이미지를 업로드합니다.
+            // Retrofit을 사용하여 이미지를 업로드
             apiService.savePhoto("Bearer ${globalVariable.accesstoken}", body).enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
@@ -239,6 +237,9 @@ class WritePhoto : ComponentActivity() {
             requestPermission()
         }
     }
+    private fun requestPermission() {
+        requestPermissions(arrayOf(Manifest.permission.READ_MEDIA_IMAGES), PERMISSION_REQUEST_CODE)
+    }
 
     private fun showPermissionExplanationDialog() {
         AlertDialog.Builder(this)
@@ -253,9 +254,6 @@ class WritePhoto : ComponentActivity() {
             .show()
     }
 
-    private fun requestPermission() {
-        requestPermissions(arrayOf(Manifest.permission.READ_MEDIA_IMAGES), PERMISSION_REQUEST_CODE)
-    }
 
     private fun openGalleryForImage() {
         pickImageLauncher.launch("image/*")

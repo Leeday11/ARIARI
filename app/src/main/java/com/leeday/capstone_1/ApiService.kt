@@ -1,4 +1,3 @@
-
 package com.leeday.capstone_1
 
 import com.google.gson.JsonArray
@@ -20,48 +19,39 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+    //사용자 정보, 로그인, 회원가입
     @POST("api/user/create")
     fun requestPostUser(@Body postData : userInfo) : Call<JsonObject>
-
     @FormUrlEncoded
     @POST("api/user/login")
     fun requestUserLogin(@Field("username") user_loginid : String, @Field("password") password : String) : Call<JsonObject>
-
     //-------------------------------------------------------------------------------------------
-
+    //게시판
     @POST("api/question/create")
     fun requestQuestionPost(
         @Header("Authorization") authorization : String,
-        @Body postData:postQuestion) : Call<JsonObject>       //Call<ResponseBody> : output
-
+        @Body postData:postQuestion) : Call<JsonObject>
     @GET("api/question/list")
-    fun getQuestionPost(@Query("tag") tag : String, @Query("size") size : Int) : Call<JsonObject>       //Call<ResponseBody> : output
-
-    @GET("api/question/detail/{question_id}") // 경로는 실제 API 경로로 수정해야 합니다.
+    fun getQuestionPost(@Query("tag") tag : String, @Query("size") size : Int) : Call<JsonObject>
+    @GET("api/question/detail/{question_id}")
     fun getQuestionPostDetail(@Path("question_id") id: Int): Call<JsonObject>
-
     //-------------------------------------------------------------------------------------------
-
+    //증상 체크
     @POST("api/symptom/create")
     fun sendAnswers(
         @Header("Authorization") authorization : String,
         @Body answer: Answer): Call<JsonObject>
-
     @POST("api/physicalpain/create")
     fun sendAnswers2(
         @Header("Authorization") authorization : String,
         @Body answer2: Answer2): Call<JsonObject>
-
     @GET("api/symptom/list")
     fun getAnswers(
         @Header("Authorization") authorization : String): Call<JsonArray>
-
     @GET("api/physicalpain/list")
     fun getAnswers2(
-        @Header("Authorization") authorization : String): Call<JsonArray> //여긴 왜 JsonArray로 해두었지...
-
+        @Header("Authorization") authorization : String): Call<JsonArray>
     //-------------------------------------------------------------------------------------------
-
     // 댓글 등록하기
     @POST("api/answer/create/{question_id}")
     fun postComment(
@@ -83,7 +73,6 @@ interface ApiService {
     fun deleteComment(@Path("answer_id") commentId: Int): Call<JsonObject>
 
     //-------------------------------------------------------------------------------------------
-
     // 다이어리 등록하기
     @POST("api/diary/create")
     fun saveDiary(@Header("Authorization") token: String, @Body diaryData: DiaryData): Call<JsonObject>
@@ -93,22 +82,16 @@ interface ApiService {
     fun getDiary(@Header("Authorization") token: String): Call<JsonArray>
 
     //-------------------------------------------------------------------------------------------
-
     // 사진 등록하기
     @Multipart
     @POST("api/imdiary/create")
     fun savePhoto(@Header("Authorization") token: String, @Part image: MultipartBody.Part): Call<JsonObject>
 
-
     // 사진 가져오기(경로, 생성일자 받아오는거고)
     @GET("api/imdiary/list")
     fun getPhoto(@Header("Authorization") token: String): Call<JsonArray>
 
-
     // 사진 가져오기(경로를 넣어서, 사진 파일 가져오기)
     @GET("api/imdiary/get_images/{file_name}")
     fun getPhotoFile(@Path("file_name") fileName: String, @Header("Authorization") token: String): Call<ResponseBody>
-
-
-
 }

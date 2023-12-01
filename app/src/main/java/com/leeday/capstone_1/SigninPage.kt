@@ -17,26 +17,16 @@ import com.leeday.capstone_1.ApiService
 import okhttp3.ResponseBody
 
 class SigninPage : AppCompatActivity() {
-
-//    private lateinit var editUsername: EditText
-//    private lateinit var editPassword1: EditText
-//    private lateinit var editPassword2: EditText
-//    private lateinit var editNickname: EditText
-//    private lateinit var editBirth: EditText
-//    private lateinit var btnCreateAccount: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.signin_page)
 
         // 전역 변수 호출
         val globalVariable = getApplication() as GlobalVariable
-
         val retrofit = Retrofit.Builder()
             .baseUrl(globalVariable.api_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         val apiService : ApiService = retrofit.create(ApiService::class.java)
 
         val user_loginid : EditText = findViewById(R.id.edit_userid)

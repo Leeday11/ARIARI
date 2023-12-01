@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background">
 
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -52,6 +51,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_muscle" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
