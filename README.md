@@ -69,6 +69,14 @@
 
 ---
 
+
+
+## 화면구조 
+<img width="800" height="auto" alt="image" src="https://github.com/user-attachments/assets/b0b1fbc4-c5c9-4e2e-a3d4-d9ebff765567" />
+
+
+---
+
 ## 시스템 아키텍처
 <img width="1500" height="auto" alt="(1114본선) 학술제_발표_9" src="https://github.com/user-attachments/assets/c2db5f41-5561-46c0-ab35-a8beaad403ee" />
 
@@ -165,22 +173,6 @@
 <br/>
 
 
-## 폴더 구조 예시
-
-```
-.
-├─ android/                # 안드로이드 앱
-├─ backend/                # FastAPI 소스
-│  ├─ app/
-│  ├─ scripts/
-│  └─ requirements.txt
-├─ unity/                  # 유니티 프로젝트
-├─ docs/                   # 스크린샷/패널/논문요약
-└─ README.md
-```
-
----
-
 ## 로드맵
 
 * [ ] 챗봇 **위험·긴급 키워드** 감지 시 지역 상담소/콜센터 안내
@@ -207,6 +199,7 @@
 
 
 ---
+
 
 
 
