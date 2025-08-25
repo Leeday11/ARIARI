@@ -1,8 +1,9 @@
 # 아리아리(ARIARI) — Application for Managing Women’s Climacteric
 
 > “갱년기(更年期)는 **새로운 나이를 사는 시기**.” 불안을 덜고, 정보를 채우고, 일상을 돌보는 올인원 케어 앱.
-<img width="250" height="250" align-item="center" alt="Group 4" src="https://github.com/user-attachments/assets/17e85369-3f8a-4189-8663-3f180dde06d9" />
-
+<p align="center">
+<img width="250" height="250" alt="Group 4" src="https://github.com/user-attachments/assets/17e85369-3f8a-4189-8663-3f180dde06d9" />
+</p>
 
 
 ---
@@ -206,5 +207,6 @@
 
 
 ---
+
 
 
