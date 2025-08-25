@@ -175,7 +175,7 @@
 
 - 이다연 — Frontend(Android), AI 챗봇 · [@Leeday11](https://github.com/Leeday11)
 - 박혜경 — Backend(FastAPI/DB), Unity 게임 · [@BakHyegyeong](https://github.com/BakHyegyeong)
-<img width="500" height="auto" alt="image" src="https://github.com/user-attachments/assets/3676023c-6037-4f68-938e-9ce8cf22124a" />
+<img width="800" height="auto" alt="image" src="https://github.com/user-attachments/assets/3676023c-6037-4f68-938e-9ce8cf22124a" />
 
 
 ---
@@ -187,6 +187,7 @@
 
 
 ---
+
 
 
 
