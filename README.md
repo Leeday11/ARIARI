@@ -68,13 +68,13 @@
 
 
 ## 화면구조 
-<img width="800" height="auto" alt="image" src="https://github.com/user-attachments/assets/b0b1fbc4-c5c9-4e2e-a3d4-d9ebff765567" />
+<img width="500" height="auto" alt="image" src="https://github.com/user-attachments/assets/b0b1fbc4-c5c9-4e2e-a3d4-d9ebff765567" />
 
 
 ---
 
 ## 시스템 아키텍처
-<img width="1500" height="auto" alt="(1114본선) 학술제_발표_9" src="https://github.com/user-attachments/assets/c2db5f41-5561-46c0-ab35-a8beaad403ee" />
+<img width="800" height="auto" alt="(1114본선) 학술제_발표_9" src="https://github.com/user-attachments/assets/c2db5f41-5561-46c0-ab35-a8beaad403ee" />
 
 * **클라이언트**: Android Studio (Android, Java/Kotlin 기반)
 * **웹 서버**: **Nginx**
@@ -175,7 +175,7 @@
 
 - 이다연 — Frontend(Android), AI 챗봇 · [@Leeday11](https://github.com/Leeday11)
 - 박혜경 — Backend(FastAPI/DB), Unity 게임 · [@BakHyegyeong](https://github.com/BakHyegyeong)
-<img width="800" height="auto" alt="image" src="https://github.com/user-attachments/assets/3676023c-6037-4f68-938e-9ce8cf22124a" />
+<img width="500" height="auto" alt="image" src="https://github.com/user-attachments/assets/3676023c-6037-4f68-938e-9ce8cf22124a" />
 
 
 ---
@@ -187,6 +187,7 @@
 
 
 ---
+
 
 
 
